@@ -62,17 +62,17 @@ def testTypeError():
   with pytest.raises(TypeError):
     foo_bar_baz(0.5)
 
-   with pytest.raises(TypeError):
+  with pytest.raises(TypeError):
     foo_bar_baz(5.0)
 
-   with pytest.raises(TypeError):
+  with pytest.raises(TypeError):
     foo_bar_baz(None)
 
-   with pytest.raises(TypeError):
+  with pytest.raises(TypeError):
     foo_bar_baz("5")
 
-   with pytest.raises(TypeError):
+  with pytest.raises(TypeError):
     foo_bar_baz("abc")
 
-   with pytest.raises(TypeError):
+  with pytest.raises(TypeError):
     foo_bar_baz("12.5")
