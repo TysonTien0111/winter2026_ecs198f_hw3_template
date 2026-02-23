@@ -33,6 +33,6 @@ def testEdgeCaseZeroOrNegative():
     assert foo_bar_baz(-5) == ""
 
 def testTypeError():
-    with pytest.raisess(TypeError):
+    with pytest.raises(TypeError):
         foo_bar_baz(0.5)
         foo_bar_baz("5")
