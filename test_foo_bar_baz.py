@@ -29,5 +29,6 @@ def testFormatting():
     assert result == result.strip()
 
 def testEdgeCaseZeroOrNegative():
+    assert foo_bar_baz(0.5) == ""
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-5) == ""
