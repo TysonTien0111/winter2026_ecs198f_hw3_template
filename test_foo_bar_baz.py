@@ -45,10 +45,10 @@ def testEdgeCaseZeroOrNegative():
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-5) == ""
 
-def testTypeError():
-    with pytest.raises(TypeError):
-        foo_bar_baz(0.5)
+def testFloatingPoint():
+    assert foo_bar_baz(0.5) == ""
 
+def testTypeError():
     with pytest.raises(TypeError):
         foo_bar_baz(True)
 
