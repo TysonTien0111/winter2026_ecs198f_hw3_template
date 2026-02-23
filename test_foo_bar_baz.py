@@ -2,11 +2,17 @@ import pytest
 from foo_bar_baz import foo_bar_baz
 
 def testBasicSequence():
-    expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"
-    assert foo_bar_baz(15) == expected
-
     expected = "1 2"
     assert foo_bar_baz(2) == expected
+
+    expected "1 2 Foo 4"
+    assert foo_bar_baz(4) == expected
+
+    expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar"
+    assert foo_bar_baz(10) == expected
+
+    expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"
+    assert foo_bar_baz(15) == expected
 
 def testSingleValues():
     assert foo_bar_baz(1) == "1"
