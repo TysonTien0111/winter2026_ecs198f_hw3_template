@@ -23,7 +23,7 @@ def testDivisibilityRules(n, expectedEnd):
     assert lastElement == expectedEnd
 
 def testFormatting():
-    n = 100
+    n = 1000000
     result = foo_bar_baz(n)
     assert result.count(" ") == n - 1
     assert result == result.strip()
