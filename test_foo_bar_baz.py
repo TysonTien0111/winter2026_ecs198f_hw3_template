@@ -92,3 +92,6 @@ def testTypeError():
 def testBoolType():
     assert foo_bar_baz(True) == "1"
     assert foo_bar_baz(False) == ""
+
+def testInfiniteLoop():
+    assert foo_bar_baz(-1) == ""
