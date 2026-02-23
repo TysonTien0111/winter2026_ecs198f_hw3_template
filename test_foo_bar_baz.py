@@ -28,10 +28,19 @@ def testFormatting():
     assert result.count(" ") == n - 1
     assert result == result.strip()
 
+    n = 0
+    result = foo_bar_baz(n)
+    assert result.count(" ") == 0
+    assert result == result.strip()
+
+    n = -5
+    result = foo_bar_baz(n)
+    assert result.count(" ") == 0
+    assert result == result.strip()
+
 def testEdgeCaseZeroOrNegative():
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-5) == ""
-    assert foo_bar_baz("abc") == ""
 
 def testTypeError():
     with pytest.raises(TypeError):
