@@ -76,3 +76,9 @@ def testTypeError():
 
   with pytest.raises(TypeError):
     foo_bar_baz("12.5")
+
+  with pytest.raises(TypeError):
+    foo_bar_baz()
+
+  with pytest.raises(TypeError):
+    foo_bar_baz(1, 2)
