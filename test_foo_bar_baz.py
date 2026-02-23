@@ -36,6 +36,11 @@ def testDivisibilityRules(n, expectedSequence):
     assert foo_bar_baz(n) == expectedSequence
 
 def testFormatting():
+    n = 10
+    result = foo_bar_baz(n)
+    assert result.count(" ") == 0
+    assert result == result.strip()
+
     n = 0
     result = foo_bar_baz(n)
     assert result.count(" ") == 0
