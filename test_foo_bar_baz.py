@@ -57,6 +57,15 @@ def testFormatting():
   assert result == result.strip()
   assert "  " not in result
 
+  n = 15
+  result = foo_bar_baz(n)
+  words = result.split(" ")
+
+  assert len(words) == n
+
+  for word in words:
+    assert word in ["Foo", "Bar", "Baz"] or word.isdigit()
+
 def testEdgeCaseZeroOrNegative():
   assert foo_bar_baz(0) == ""
   assert foo_bar_baz(-5) == ""
