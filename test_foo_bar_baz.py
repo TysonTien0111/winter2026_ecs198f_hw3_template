@@ -99,17 +99,25 @@ def testTypeError():
     foo_bar_baz({"apple" : 1, "banana" : 2})
 
 def testBoolType():
-    assert foo_bar_baz(True) == "1"
-    assert foo_bar_baz(False) == ""
+  assert foo_bar_baz(True) == "1"
+  assert foo_bar_baz(False) == ""
 
 def testInfiniteLoop():
-    assert foo_bar_baz(-1) == ""
+  assert foo_bar_baz(-1) == ""
 
 def testLargeNumberEfficiencyAndType():
-    n = 100000
-    result = foo_bar_baz(n)
+  n = 100000
+  result = foo_bar_baz(n)
 
-    assert isinstance(result, str)
-    assert result.startswith("1 2 Foo 4 Bar")
-    assert result.endswith("Bar")
-    assert result.count(" ") == n - 1
+  assert isinstance(result, str)
+  assert result.startswith("1 2 Foo 4 Bar")
+  assert result.endswith("Bar")
+  assert result.count(" ") == n - 1
+
+def testSneakyConversionsAndSpacing():
+  with pytest.raises(TypeError):
+    foo_bar_baz(5.9)
+
+  result = foo_bar_baz(5)
+  assert result == "1 2 Foo 4 Bar"
+  assert len(result) == 13
