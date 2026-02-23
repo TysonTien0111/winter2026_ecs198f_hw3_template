@@ -29,6 +29,10 @@ def testFormatting():
     assert result == result.strip()
 
 def testEdgeCaseZeroOrNegative():
-    assert foo_bar_baz(0.5) == ""
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-5) == ""
+
+def testTypeError():
+    with pytest.raisess(TypeError):
+        foo_bar_baz(0.5)
+        foo_bar_baz("5")
