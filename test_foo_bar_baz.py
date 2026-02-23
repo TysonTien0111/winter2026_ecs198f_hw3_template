@@ -157,3 +157,9 @@ def testExhaustiveLoopAndKwargs():
         assert word == "Bar"
       else:
         assert word == str(i)
+
+def testTypeHints():
+  annotations = foo_bar_baz.__annotations__
+
+  assert annotations.get('n') == int
+  assert annotations.get('return') == str
