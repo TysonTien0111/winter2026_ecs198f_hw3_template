@@ -22,6 +22,18 @@ def testSingleValues():
 
 def testDivisibilityRules(n, expectedEnd):
     result = foo_bar_baz(n)
+    thirdElement = result.split()[2]
+    assert thirdElement == expectedEnd
+
+    result = foo_bar_baz(n)
+    fifthElement = result.split()[4]
+    assert fifthElement == expectedEnd
+
+    result = foo_bar_baz(n)
+    fifthteenthElement = result.split()[14]
+    assert fifthteenthElement == expectedEnd
+
+    result = foo_bar_baz(n)
     lastElement = result.split()[-1]
     assert lastElement == expectedEnd
 
