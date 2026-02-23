@@ -87,7 +87,7 @@ def testTypeError():
     foo_bar_baz([1, 2, 3])
 
   with pytest.raises(TypeError):
-    foo_bar_baz({apple : 1, banana : 2})
+    foo_bar_baz({"apple" : 1, "banana" : 2})
 
 def testBoolType():
     assert foo_bar_baz(True) == "1"
