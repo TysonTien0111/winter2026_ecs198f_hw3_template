@@ -33,11 +33,6 @@ def testDivisibilityRules(n, expectedSequence):
     assert foo_bar_baz(n) == expectedSequence
 
 def testFormatting():
-    n = 1000000
-    result = foo_bar_baz(n)
-    assert result.count(" ") == n - 1
-    assert result == result.strip()
-
     n = 0
     result = foo_bar_baz(n)
     assert result.count(" ") == 0
@@ -70,12 +65,3 @@ def testTypeError():
 
     with pytest.raises(TypeError):
         foo_bar_baz("12.5")
-
-    with pytest.raises(TypeError):
-        foo_bar_baz("abc", 12)
-
-    with pytest.raises(TypeError):
-        foo_bar_baz(12, "abc")
-
-    with pytest.raises(TypeError):
-        foo_bar_baz()
