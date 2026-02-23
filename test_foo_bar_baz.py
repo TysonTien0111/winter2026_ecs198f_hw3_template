@@ -16,7 +16,7 @@ def testSingleValues():
 @pytest.mark.parametrize("n, expectedSequence", [
     (3, "1 2 Foo"),
     (5, "1 2 Foo 4 Bar"),
-    (15, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz")
+    (15, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"),
     (30, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz 16 17 Foo 19 Bar Foo 22 23 Foo Bar 26 Foo 28 29 Baz")
 ])
 
