@@ -5,7 +5,7 @@ def testBasicSequence():
     expected = "1 2"
     assert foo_bar_baz(2) == expected
 
-    expected "1 2 Foo 4"
+    expected = "1 2 Foo 4"
     assert foo_bar_baz(4) == expected
 
     expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar"
@@ -70,3 +70,6 @@ def testTypeError():
 
     with pytest.raises(TypeError):
         foo_bar_baz(12, "abc")
+
+    with pytest.raises(TypeError):
+        foo_bar_baz()
