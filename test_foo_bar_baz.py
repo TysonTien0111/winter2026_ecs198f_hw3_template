@@ -13,29 +13,15 @@ def testSingleValues():
     assert foo_bar_baz(3) == "1 2 Foo"
     assert foo_bar_baz(5) == "1 2 Foo 4 Bar"
 
-@pytest.mark.parametrize("n, expectedEnd", [
-    (3, "Foo"),
-    (5, "Bar"),
-    (15, "Baz"),
-    (30, "Baz"),
+@pytest.mark.parametrize("n, expected_sequence", [
+    (3, "1 2 Foo"),
+    (5, "1 2 Foo 4 Bar"),
+    (15, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz")
+    (30, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz 16 17 Foo 19 Bar Foo 22 23 Foo Bar 26 Foo 28 29 Baz")
 ])
 
-def testDivisibilityRules(n, expectedEnd):
-    result = foo_bar_baz(n)
-    thirdElement = result.split()[2]
-    assert thirdElement == expectedEnd
-
-    result = foo_bar_baz(n)
-    fifthElement = result.split()[4]
-    assert fifthElement == expectedEnd
-
-    result = foo_bar_baz(n)
-    fifthteenthElement = result.split()[14]
-    assert fifthteenthElement == expectedEnd
-
-    result = foo_bar_baz(n)
-    lastElement = result.split()[-1]
-    assert lastElement == expectedEnd
+def testDivisibilityRules(n, expected_sequence):
+    assert foo_bar_baz(n) == expected_sequence
 
 def testFormatting():
     n = 1000000
