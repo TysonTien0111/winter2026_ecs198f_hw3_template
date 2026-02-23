@@ -95,3 +95,12 @@ def testBoolType():
 
 def testInfiniteLoop():
     assert foo_bar_baz(-1) == ""
+
+def testLargeNumberEfficiencyAndType():
+    n = 100000
+    result = foo_bar_baz(n)
+
+    assert isinstance(result, str)
+    assert result.startswith("1 2 Foo 4 Bar")
+    assert result.endswith("Bar")
+    assert result.count(" ") == n - 1
