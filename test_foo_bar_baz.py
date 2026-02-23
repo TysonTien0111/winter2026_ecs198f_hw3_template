@@ -121,3 +121,21 @@ def testSneakyConversionsAndSpacing():
   result = foo_bar_baz(5)
   assert result == "1 2 Foo 4 Bar"
   assert len(result) == 13
+
+def testDynamicLogic():
+  n = 100
+  result = foo_bar_baz(n).split(" ")
+
+  assert len(result) == n
+
+  for i in range(1, n + 1):
+    word = result[i - 1]
+
+    if i % 3 == 0 and i % 5 == 0:
+      assert word == "Baz"
+    elif i % 3 == 0:
+      assert word == "Foo"
+    elif i % 5 == 0:
+      assert word == "Bar"
+    else:
+      assert word == str(i)
