@@ -31,3 +31,6 @@ def testFormatting():
 def testEdgeCaseZeroOrNegative():
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-5) == ""
+
+def testProperInput():
+    assert foo_bar_baz("abc") == ""
