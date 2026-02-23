@@ -48,10 +48,24 @@ def testEdgeCaseZeroOrNegative():
 def testTypeError():
     with pytest.raises(TypeError):
         foo_bar_baz(0.5)
+
+    with pytest.raises(TypeError):
         foo_bar_baz(True)
+
+    with pytest.raises(TypeError):
         foo_bar_baz(None)
+
+    with pytest.raises(TypeError):
         foo_bar_baz("5")
+
+    with pytest.raises(TypeError):
         foo_bar_baz("abc")
+
+    with pytest.raises(TypeError):
         foo_bar_baz("12.5")
+
+    with pytest.raises(TypeError):
         foo_bar_baz("abc", 12)
+
+    with pytest.raises(TypeError):
         foo_bar_baz(12, "abc")
