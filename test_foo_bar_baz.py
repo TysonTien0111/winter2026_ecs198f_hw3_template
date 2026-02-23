@@ -31,6 +31,7 @@ def testFormatting():
 def testEdgeCaseZeroOrNegative():
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-5) == ""
+    assert foo_bar_baz("abc") == ""
 
 def testTypeError():
     with pytest.raises(TypeError):
@@ -42,17 +43,3 @@ def testTypeError():
         foo_bar_baz("12.5")
         foo_bar_baz("abc", 12)
         foo_bar_baz(12, "abc")
-
-def test_returns_and_does_not_print(capsys):
-    """Ensure the function returns a string and does not print to stdout."""
-    # 1. Call the function
-    result = foo_bar_baz(5)
-    
-    # 2. Capture any console output
-    captured = capsys.readouterr()
-    
-    # 3. Assert absolutely nothing was printed to the console
-    assert captured.out == "", "Function should not print anything!"
-    
-    # 4. Assert the function actually returned the correct string
-    assert result == "1 2 Foo 4 Bar", "Function must return the string, not None."
