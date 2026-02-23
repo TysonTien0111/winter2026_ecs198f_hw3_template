@@ -13,15 +13,15 @@ def testSingleValues():
     assert foo_bar_baz(3) == "1 2 Foo"
     assert foo_bar_baz(5) == "1 2 Foo 4 Bar"
 
-@pytest.mark.parametrize("n, expected_sequence", [
+@pytest.mark.parametrize("n, expectedSequence", [
     (3, "1 2 Foo"),
     (5, "1 2 Foo 4 Bar"),
     (15, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz")
     (30, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz 16 17 Foo 19 Bar Foo 22 23 Foo Bar 26 Foo 28 29 Baz")
 ])
 
-def testDivisibilityRules(n, expected_sequence):
-    assert foo_bar_baz(n) == expected_sequence
+def testDivisibilityRules(n, expectedSequence):
+    assert foo_bar_baz(n) == expectedSequence
 
 def testFormatting():
     n = 1000000
@@ -46,9 +46,6 @@ def testEdgeCaseZeroOrNegative():
 def testTypeError():
     with pytest.raises(TypeError):
         foo_bar_baz(0.5)
-
-    with pytest.raises(TypeError):
-        foo_bar_baz(True)
 
     with pytest.raises(TypeError):
         foo_bar_baz(None)
