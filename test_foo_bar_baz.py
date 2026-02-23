@@ -8,9 +8,6 @@ def testBasicSequence():
   expected = "1 2 Foo 4"
   assert foo_bar_baz(4) == expected
 
-  # NOTE: DELETE THIS
-  assert foo_bar_baz(5) == "DEBUG_ME"
-
   expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar"
   assert foo_bar_baz(10) == expected
 
