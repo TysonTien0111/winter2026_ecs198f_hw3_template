@@ -163,3 +163,12 @@ def testTypeHints():
 
   assert annotations.get('n') == int
   assert annotations.get('return') == str
+
+def testLargeNumberBazLogic():
+  n = 300
+  result = foo_bar_baz(n).split(" ")
+
+  assert result == "Baz"
+  assert result == "Baz"
+  assert result == "Baz"
+  assert result == "Baz"
