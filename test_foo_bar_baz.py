@@ -177,3 +177,6 @@ def testBazPrecedenceLogic():
 
   assert result_15 == "Baz", f"{error_msg} Expected 'Baz' for 15, got '{result_15}'."
   assert result_30 == "Baz", f"{error_msg} Expected 'Baz' for 30, got '{result_30}'."
+
+def testFooBar():
+  assert "FooBar" not in foo_bar_baz(15)
