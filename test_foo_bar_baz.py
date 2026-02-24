@@ -169,3 +169,11 @@ def testLargeNumberBazLogic():
   result = foo_bar_baz(n).split(" ")
 
   assert result[-1] == "Baz"
+
+def testBazPrecedenceLogic():
+  result_15 = foo_bar_baz(15).split(" ")[-1]
+  result_30 = foo_bar_baz(30).split(" ")[-1]
+  error_msg = "Precedence error: Ensure 'divisible by both' is checked BEFORE individual divisibility."
+
+  assert result_15 == "Baz", f"{error_msg} Expected 'Baz' for 15, got '{result_15}'."
+  assert result_30 == "Baz", f"{error_msg} Expected 'Baz' for 30, got '{result_30}'."
