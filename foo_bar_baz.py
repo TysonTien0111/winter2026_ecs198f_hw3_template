@@ -11,5 +11,4 @@ def foo_bar_baz(n: int) -> str:
             return_str += str(i)
         if i < n:
             return_str += " "
-
     return return_str
