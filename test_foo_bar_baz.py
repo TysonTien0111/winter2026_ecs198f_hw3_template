@@ -1,10 +1,9 @@
 from foo_bar_baz import foo_bar_baz
-
 import pytest
 
 def testExhaustiveLogic():
     for n in range(1, 51):
-        result = foo_bar_baz.foo_bar_baz(n)
+        result = foo_bar_baz(n)
         words = result.split(" ")
 
         assert len(words) == n, f"Length mismatch for n = {n}"
@@ -24,29 +23,30 @@ def testExhaustiveLogic():
 
 def testFormattingSpaces():
     n = 10
-    result = foo_bar_baz.foo_bar_baz(n)
+    result = foo_bar_baz(n)
 
     assert result.count(" ") == n - 1
     assert "  " not in result
     assert result == result.strip()
 
 def testEmptyForZeroOrNegative():
-    assert foo_bar_baz.foo_bar_baz(0) == ""
-    assert foo_bar_baz.foo_bar_baz(-1) == ""
-    assert foo_bar_baz.foo_bar_baz(-10) == ""
+    assert foo_bar_baz(0) == ""
+    assert foo_bar_baz(-1) == ""
+    assert foo_bar_baz(-10) == ""
 
 def testTypeErrors():
     with pytest.raises(TypeError):
-        foo_bar_baz.foo_bar_baz(1.5)
+        foo_bar_baz(1.5)
     with pytest.raises(TypeError):
-        foo_bar_baz.foo_bar_baz("5")
+        foo_bar_baz("5")
     with pytest.raises(TypeError):
-        foo_bar_baz.foo_bar_baz(None)
+        foo_bar_baz(None)
     with pytest.raises(TypeError):
-        foo_bar_baz.foo_bar_baz()
+        # Missing argument typically raises TypeError in Python functions
+        foo_bar_baz()
 
 def testCaseSensitivity():
-    result = foo_bar_baz.foo_bar_baz(15)
+    result = foo_bar_baz(15)
 
     assert "Foo" in result
     assert "Bar" in result
@@ -56,7 +56,7 @@ def testCaseSensitivity():
     assert "baz" not in result
 
 def testNoFizzBuzzLabels():
-    result = foo_bar_baz.foo_bar_baz(15)
+    result = foo_bar_baz(15)
 
     assert "Fizz" not in result
     assert "Buzz" not in result
