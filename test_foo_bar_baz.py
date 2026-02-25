@@ -1,78 +1,68 @@
 import pytest
-from foo_bar_baz import foo_bar_baz
+import foo_bar_baz
 
-def test_single_value_1():
-    assert foo_bar_baz(1) == "1"
+def test_exhaustive_logic():
+    """Check every value from 1 to 50 for correct sequence logic."""
+    for n in range(1, 51):
+        result = foo_bar_baz.foo_bar_baz(n)
+        words = result.split(" ")
+        
+        # Check length
+        assert len(words) == n, f"Length mismatch for n={n}"
+        
+        # Check each word
+        for i in range(1, n + 1):
+            val = i
+            word = words[i-1]
+            if val % 3 == 0 and val % 5 == 0:
+                assert word == "Baz", f"Expected Baz at {val} for n={n}"
+            elif val % 3 == 0:
+                assert word == "Foo", f"Expected Foo at {val} for n={n}"
+            elif val % 5 == 0:
+                assert word == "Bar", f"Expected Bar at {val} for n={n}"
+            else:
+                assert word == str(val), f"Expected {val} at {val} for n={n}"
 
-def test_single_value_2():
-    assert foo_bar_baz(2) == "1 2"
-
-def test_divisible_by_3_only():
-    # n=3 should end with Foo
-    result = foo_bar_baz(3)
-    assert result == "1 2 Foo"
-
-def test_divisible_by_5_only():
-    # n=5 should end with Bar
-    result = foo_bar_baz(5)
-    assert result == "1 2 Foo 4 Bar"
-
-def test_divisible_by_both_3_and_5():
-    # n=15 is the first Baz
-    result = foo_bar_baz(15)
-    expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"
-    assert result == expected
-
-def test_divisible_by_both_3_and_5_extended():
-    # n=30 should have two Baz occurrences
-    result = foo_bar_baz(30)
-    words = result.split()
-    assert words[14] == "Baz"
-    assert words[29] == "Baz"
-
-def test_sequence_up_to_10():
-    assert foo_bar_baz(10) == "1 2 Foo 4 Bar Foo 7 8 Foo Bar"
-
-def test_formatting_no_trailing_space():
-    result = foo_bar_baz(5)
-    assert result == result.strip()
-    assert len(result.split(" ")) == 5
-
-def test_formatting_spaces_between_words():
-    result = foo_bar_baz(10)
+def test_formatting_spaces():
+    """Ensure exactly one space between words and no trailing spaces."""
+    n = 10
+    result = foo_bar_baz.foo_bar_baz(n)
+    # n words should have n-1 spaces
+    assert result.count(" ") == n - 1
+    # Ensure no double spaces
     assert "  " not in result
-    assert result.count(" ") == 9
+    # Ensure no leading/trailing whitespace
+    assert result == result.strip()
 
-def test_edge_case_zero():
-    assert foo_bar_baz(0) == ""
+def test_empty_for_zero_or_negative():
+    assert foo_bar_baz.foo_bar_baz(0) == ""
+    assert foo_bar_baz.foo_bar_baz(-1) == ""
+    assert foo_bar_baz.foo_bar_baz(-10) == ""
 
-def test_edge_case_negative():
-    assert foo_bar_baz(-5) == ""
-
-def test_type_error_float():
+def test_type_errors():
     with pytest.raises(TypeError):
-        foo_bar_baz(5.5)
-
-def test_type_error_string():
+        foo_bar_baz.foo_bar_baz(1.5)
     with pytest.raises(TypeError):
-        foo_bar_baz("10")
-
-def test_type_error_none():
+        foo_bar_baz.foo_bar_baz("5")
     with pytest.raises(TypeError):
-        foo_bar_baz(None)
+        foo_bar_baz.foo_bar_baz(None)
+    with pytest.raises(TypeError):
+        # Missing argument
+        foo_bar_baz.foo_bar_baz()
 
 def test_case_sensitivity():
-    # Ensure it's not "foo", "bar", "baz"
-    result = foo_bar_baz(15)
+    result = foo_bar_baz.foo_bar_baz(15)
+    # Requirement says "Foo", "Bar", "Baz"
     assert "Foo" in result
     assert "Bar" in result
     assert "Baz" in result
+    # Ensure no lowercase versions
     assert "foo" not in result
     assert "bar" not in result
     assert "baz" not in result
 
-def test_no_fizz_buzz():
-    # Ensure it's not the standard FizzBuzz words
-    result = foo_bar_baz(15)
+def test_no_fizzbuzz_labels():
+    result = foo_bar_baz.foo_bar_baz(15)
+    # Make sure we didn't use common FizzBuzz words
     assert "Fizz" not in result
     assert "Buzz" not in result
