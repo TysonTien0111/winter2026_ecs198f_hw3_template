@@ -12,7 +12,4 @@ def foo_bar_baz(n: int) -> str:
         if i < n:
             return_str += " "
 
-    print(return_str)
     return return_str
-
-foo_bar_baz(99)

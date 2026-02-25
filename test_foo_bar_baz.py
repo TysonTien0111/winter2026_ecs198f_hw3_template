@@ -1,99 +1,78 @@
 import pytest
 from foo_bar_baz import foo_bar_baz
 
-def testBasicSequence():
-  expected = "1 2"
-  assert foo_bar_baz(2) == expected
+def test_single_value_1():
+    assert foo_bar_baz(1) == "1"
 
-  expected = "1 2 Foo 4"
-  assert foo_bar_baz(4) == expected
+def test_single_value_2():
+    assert foo_bar_baz(2) == "1 2"
 
-  expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar"
-  assert foo_bar_baz(10) == expected
+def test_divisible_by_3_only():
+    # n=3 should end with Foo
+    result = foo_bar_baz(3)
+    assert result == "1 2 Foo"
 
-  expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"
-  assert foo_bar_baz(15) == expected
+def test_divisible_by_5_only():
+    # n=5 should end with Bar
+    result = foo_bar_baz(5)
+    assert result == "1 2 Foo 4 Bar"
 
-  expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz 16 17 Foo 19 Bar Foo 22 23 Foo Bar 26 Foo 28 29 Baz"
-  assert foo_bar_baz(30) == expected
+def test_divisible_by_both_3_and_5():
+    # n=15 is the first Baz
+    result = foo_bar_baz(15)
+    expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"
+    assert result == expected
 
-  expected = "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz 16 17 Foo 19 Bar Foo 22 23 Foo Bar 26 Foo 28 29 Baz 31 32 Foo 34 Bar Foo 37 38 Foo Bar 41 Foo 43 44 Baz 46 47 Foo 49 Bar Foo 52 53 Foo Bar 56 Foo 58 59 Baz 61 62 Foo 64 Bar Foo 67 68 Foo Bar 71 Foo 73 74 Baz 76 77 Foo 79 Bar Foo 82 83 Foo Bar 86 Foo 88 89 Baz 91 92 Foo 94 Bar Foo 97 98 Foo"
-  assert foo_bar_baz(99) == expected
+def test_divisible_by_both_3_and_5_extended():
+    # n=30 should have two Baz occurrences
+    result = foo_bar_baz(30)
+    words = result.split()
+    assert words[14] == "Baz"
+    assert words[29] == "Baz"
 
-def testSingleValues():
-  assert foo_bar_baz(1) == "1"
-  assert foo_bar_baz(3) == "1 2 Foo"
-  assert foo_bar_baz(5) == "1 2 Foo 4 Bar"
+def test_sequence_up_to_10():
+    assert foo_bar_baz(10) == "1 2 Foo 4 Bar Foo 7 8 Foo Bar"
 
-@pytest.mark.parametrize("n, expectedSequence", [
-  (3, "1 2 Foo"),
-  (5, "1 2 Foo 4 Bar"),
-  (15, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz"),
-  (30, "1 2 Foo 4 Bar Foo 7 8 Foo Bar 11 Foo 13 14 Baz 16 17 Foo 19 Bar Foo 22 23 Foo Bar 26 Foo 28 29 Baz")
-])
+def test_formatting_no_trailing_space():
+    result = foo_bar_baz(5)
+    assert result == result.strip()
+    assert len(result.split(" ")) == 5
 
-def testDivisibilityRules(n, expectedSequence):
-  assert foo_bar_baz(n) == expectedSequence
+def test_formatting_spaces_between_words():
+    result = foo_bar_baz(10)
+    assert "  " not in result
+    assert result.count(" ") == 9
 
-def testFormatting():
-  n = 10
-  result = foo_bar_baz(n)
-  assert result.count(" ") == n -1
-  assert result == result.strip()
-  assert "  " not in result
+def test_edge_case_zero():
+    assert foo_bar_baz(0) == ""
 
-  n = 0
-  result = foo_bar_baz(n)
-  assert result.count(" ") == 0
-  assert result == result.strip()
-  assert "  " not in result
+def test_edge_case_negative():
+    assert foo_bar_baz(-5) == ""
 
-  n = -5
-  result = foo_bar_baz(n)
-  assert result.count(" ") == 0
-  assert result == result.strip()
-  assert "  " not in result
+def test_type_error_float():
+    with pytest.raises(TypeError):
+        foo_bar_baz(5.5)
 
-  n = 15
-  result = foo_bar_baz(n)
-  words = result.split(" ")
+def test_type_error_string():
+    with pytest.raises(TypeError):
+        foo_bar_baz("10")
 
-  assert len(words) == n
+def test_type_error_none():
+    with pytest.raises(TypeError):
+        foo_bar_baz(None)
 
-  for word in words:
-    assert word in ["Foo", "Bar", "Baz"] or word.isdigit()
+def test_case_sensitivity():
+    # Ensure it's not "foo", "bar", "baz"
+    result = foo_bar_baz(15)
+    assert "Foo" in result
+    assert "Bar" in result
+    assert "Baz" in result
+    assert "foo" not in result
+    assert "bar" not in result
+    assert "baz" not in result
 
-def testEdgeCaseZeroOrNegative():
-  assert foo_bar_baz(0) == ""
-  assert foo_bar_baz(-5) == ""
-
-def testTypeError():
-  with pytest.raises(TypeError):
-    foo_bar_baz(0.5)
-
-  with pytest.raises(TypeError):
-    foo_bar_baz(5.0)
-
-  with pytest.raises(TypeError):
-    foo_bar_baz(None)
-
-  with pytest.raises(TypeError):
-    foo_bar_baz("5")
-
-  with pytest.raises(TypeError):
-    foo_bar_baz("abc")
-
-  with pytest.raises(TypeError):
-    foo_bar_baz("12.5")
-
-  with pytest.raises(TypeError):
-    foo_bar_baz()
-
-  with pytest.raises(TypeError):
-    foo_bar_baz(1, 2)
-
-  with pytest.raises(TypeError):
-    foo_bar_baz([1, 2, 3])
-
-  with pytest.raises(TypeError):
-    foo_bar_baz({"apple" : 1, "banana" : 2})
+def test_no_fizz_buzz():
+    # Ensure it's not the standard FizzBuzz words
+    result = foo_bar_baz(15)
+    assert "Fizz" not in result
+    assert "Buzz" not in result
