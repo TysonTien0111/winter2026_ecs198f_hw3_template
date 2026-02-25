@@ -3,3 +3,5 @@ venv/
 
 #Python pycache files
 __pycache__/
+
+foo_bar_baz.py
