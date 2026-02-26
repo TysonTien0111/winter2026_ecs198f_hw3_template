@@ -1,7 +1,8 @@
-from foo_bar_baz import foo_bar_baz
 import pytest
 
 def testExhaustiveLogic():
+    from foo_bar_baz import foo_bar_baz
+
     for n in range(1, 51):
         result = foo_bar_baz(n)
         words = result.split(" ")
@@ -22,6 +23,8 @@ def testExhaustiveLogic():
                 assert word == str(val), f"Expected {val} at {val} for n = {n}"
 
 def testFormattingSpaces():
+    from foo_bar_baz import foo_bar_baz
+
     n = 10
     result = foo_bar_baz(n)
 
@@ -30,11 +33,15 @@ def testFormattingSpaces():
     assert result == result.strip()
 
 def testEmptyForZeroOrNegative():
+    from foo_bar_baz import foo_bar_baz
+
     assert foo_bar_baz(0) == ""
     assert foo_bar_baz(-1) == ""
     assert foo_bar_baz(-10) == ""
 
 def testTypeErrors():
+    from foo_bar_baz import foo_bar_baz
+
     with pytest.raises(TypeError):
         foo_bar_baz(1.5)
     with pytest.raises(TypeError):
@@ -46,6 +53,8 @@ def testTypeErrors():
         foo_bar_baz()
 
 def testCaseSensitivity():
+    from foo_bar_baz import foo_bar_baz
+
     result = foo_bar_baz(15)
 
     assert "Foo" in result
@@ -56,6 +65,8 @@ def testCaseSensitivity():
     assert "baz" not in result
 
 def testNoFizzBuzzLabels():
+    from foo_bar_baz import foo_bar_baz
+
     result = foo_bar_baz(15)
 
     assert "Fizz" not in result
